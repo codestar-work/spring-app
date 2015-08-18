@@ -6,6 +6,7 @@
 			class="form-control"
 			type="text"
 			placeholder="Topic"
+			autofocus="autofocus"
 		/>
 		<textarea name="detail"
 			class="form-control"
