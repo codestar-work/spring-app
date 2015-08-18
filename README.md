@@ -1,5 +1,8 @@
 # ตัวอย่าง Spring Application
-เป็นตัวอย่างการนำ Spring MVC ไปใช้งาน มีตัวอย่างการใช้ @Controller และ @RestController ทำงานได้บนฐานข้อมูลทุกชนิด ผ่าน Hibernate ส่วน front-end ใช้ Bootstrap, jQuery และ Angular.js
+เป็นตัวอย่างการนำ Spring MVC ไปใช้งาน มีตัวอย่างการใช้ @Controller และ 
+@RestController ทำงานได้บนฐานข้อมูลทุกชนิด ผ่าน Hibernate 
+และใช้ FreeMarker เป็น Template Engine
+ส่วน front-end ใช้ Bootstrap, jQuery และ Angular.js
 
 # สิ่งที่ต้องมี
 - MySQL หรือ ฐานข้อมูลอื่น
