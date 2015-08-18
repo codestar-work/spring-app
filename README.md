@@ -11,7 +11,18 @@
 - หรือ เปิด project จาก IDE แล้วเลือก Build
 
 # Run
-- ก่อนรันต้อง execute ไฟล์่ schema.sql ในฐานข้อมูลก่อน
+- ก่อนรันต้อง execute ไฟล์ schema.sql ในฐานข้อมูลก่อน
 - ใช้คำสั่ง java -jar target/spring-app-1.jar
-- ใช้คำสั่ง mvn spring-boot:run หรือ
-- Run ผ่าน IDE
+- หรือ ใช้คำสั่ง mvn spring-boot:run
+- หรือ Run ผ่าน IDE
+
+# การใช้งาน
+- เปิด browser ไปที่ http://localhost:3000
+- ถ้า deploy บน app server ให้ไปที่ URL ที่กำหนดเช่น http://localhost:8080/spring-app
+- ใช้ Email: user@codestar.work และ Password: password ในการใช้งาน
+
+# หลักการทำงาน
+- pom.xml
+- schema.sql
+- src/main/java/web/Application.java
+- src/main/java/web/Web.java
