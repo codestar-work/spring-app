@@ -4,7 +4,7 @@
 # สิ่งที่ต้องมี
 - MySQL หรือ ฐานข้อมูลอื่น
 - JDK
-- Apache Maven หรือ IDE เช่น NetBeans
+- Maven หรือ IDE เช่น NetBeans
 
 # Build
 - ใช้คำสั่ง mvn package
@@ -22,7 +22,11 @@
 - ใช้ Email: user@codestar.work และ Password: password ในการใช้งาน
 
 # หลักการทำงาน
-- pom.xml
-- schema.sql
-- src/main/java/web/Application.java
-- src/main/java/web/Web.java
+- pom.xml ระบบนี้ใช้ Maven ในการ build ดังนั้นต้องมี file นี้ก่อน 
+- schema.sql ใช้สร้างฐานข้อมูล
+- src/main/java/web/Application.java ถ้ารันผ่าน Spring Boot หรือ .jar โปรแกรมจะเริ่มที่นี่
+- src/main/java/web/Demo.java ตัวอย่างการใช้ @RestController
+- src/main/java/web/Database.java ตัวอย่างการใช้ JDBC
+- src/main/java/web/Hibernate.java ตัวอย่างการใช้ Hibernate 
+- src/main/java/web/Variable.java ตัวอย่างการรับ parameter แบบธรรมดาและ @PathVariable
+- src/main/java/web/Web.java เป็น controller หลักของระบบ
