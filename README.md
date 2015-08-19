@@ -4,6 +4,9 @@
 และใช้ FreeMarker เป็น Template Engine
 ส่วน front-end ใช้ Bootstrap, jQuery และ Angular.js
 นอกจากนี้ยังรองรับการทำงานหลายภาษา Hello 您好 こんにちは 안녕하세요
+
+![](https://raw.githubusercontent.com/codestar-work/spring-app/master/page.png)
+
 # สิ่งที่ต้องมี
 - MySQL หรือ ฐานข้อมูลอื่น
 - JDK
