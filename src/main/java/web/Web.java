@@ -2,7 +2,6 @@ package web;
 import java.io.*;
 import java.sql.*;
 import java.util.*;
-import java.security.*;
 import javax.sql.*;
 import javax.annotation.*;
 import javax.persistence.*;
@@ -54,9 +53,8 @@ public class Web {
 	}
 
 	@RequestMapping("/login")
-	String login(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("email") == null) {
+	String login(HttpSession session) {
+		if (session.getAttribute("user") == null) {
 			return "login";
 		} else {
 			return "redirect:/";
@@ -64,7 +62,7 @@ public class Web {
 	}
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	String doLogin(HttpServletRequest request, String email, String password) {
+	String doLogin(HttpSession session, String email, String password) {
 		Session database = factory.openSession();
 		org.hibernate.Query query = database.createQuery(
 			"from User where email = :email and password = :password");
@@ -74,8 +72,7 @@ public class Web {
 		
 		if (list.size() == 1) {
 			User user = (User)list.get(0);
-			request.getSession().setAttribute("email", email);
-			request.getSession().setAttribute("user", user);
+			session.setAttribute("user", user);
 			database.close();
 			return "redirect:/post";
 		} else {
@@ -86,7 +83,8 @@ public class Web {
 	String encode(String s) {
 		String result = "";
 		try {
-			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			java.security.MessageDigest digest = java.security.MessageDigest.
+				getInstance("SHA-256");
 			byte[] hash = digest.digest(s.getBytes("UTF-8"));
 			for (int i = 0; i < hash.length; i++) {
 				String hex = Integer.toHexString(0xff & hash[i]);
@@ -99,17 +97,15 @@ public class Web {
 	}
 
 	@RequestMapping("/logout")
-	String logout(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
+	String logout(HttpSession session) {
 		session.removeAttribute("email");
 		session.invalidate();
 		return "logout";
 	}
 
 	@RequestMapping("/post")
-	String post(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("email") == null) {
+	String post(HttpSession session) {
+		if (session.getAttribute("user") == null) {
 			return "redirect:/login";
 		} else {
 			return "post";
@@ -117,10 +113,9 @@ public class Web {
 	}
 
 	@RequestMapping(value="/post", method=RequestMethod.POST)
-	String postTopic(HttpServletRequest request, 
+	String postTopic(HttpSession session, 
 		String topic, String detail, MultipartFile file) {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("email") == null) {
+		if (session.getAttribute("user") == null) {
 			return "redirect:/login";
 		} else {
 			String path = "src/main/resources/public/upload/";

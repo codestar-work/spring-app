@@ -1,5 +1,19 @@
 body {
-	background: white;
+	background: #f8f8f8;
+}
+
+p {
+	text-align: justify;
+	text-overflow: ellipsis;
+}
+
+a {
+	color:#444;
+	transition: all 0.2s ease-in;
+}
+a:hover {
+	text-decoration: none;
+	color: #222;
 }
 
 .btn {
@@ -20,4 +34,15 @@ form > * {
 #navigator a {
 	color: white;
 	margin-right: 10px;
+}
+
+img.highlight {
+	max-width: 100%;
+	display: block;
+	margin: 0 auto;
+}
+
+div.highlight p {
+	margin-top: 10px;
+	text-align: justify;
 }
