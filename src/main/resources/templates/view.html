@@ -1,4 +1,4 @@
-<#include "header.ftl">
+<#include "header.html">
 <style>
 	p {
 		max-width: 640px;
@@ -17,13 +17,15 @@
 			</h3>
 		</div>
 		<div class="panel-body">
+			<#if post.file != "unknown.jpg">
 			<img class="highlight" 
 				src="${request.contextPath}/upload/${post.file}" 
 			/>
+			</#if>
 			<p>
 				${post.detail}
 			</p>
 		</div>
 	</div>
 </div>
-<#include "footer.ftl">
+<#include "footer.html">
