@@ -3,7 +3,7 @@
 @RestController ทำงานได้บนฐานข้อมูลทุกชนิด ผ่าน Hibernate 
 และใช้ FreeMarker เป็น Template Engine
 ส่วน front-end ใช้ Bootstrap, jQuery และ Angular.js
-
+นอกจากนี้ยังรองรับการทำงานหลายภาษา Hello 您好 こんにちは 안녕하세요
 # สิ่งที่ต้องมี
 - MySQL หรือ ฐานข้อมูลอื่น
 - JDK
