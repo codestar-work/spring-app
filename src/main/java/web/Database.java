@@ -1,12 +1,10 @@
 package web;
 import java.sql.*;
 import java.util.*;
-import java.security.*;
-import javax.annotation.*;
-import javax.persistence.*;
+import javax.sql.*;
+import org.hibernate.*;
+import org.hibernate.cfg.*;
 import org.springframework.boot.*;
-import org.springframework.stereotype.*;
-import org.springframework.boot.autoconfigure.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.*;
 

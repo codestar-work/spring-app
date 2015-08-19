@@ -7,9 +7,9 @@ use database1;
 -- drop table if exists users;
 create table users (
   id         serial,
-  email      nvarchar(255) unique,
-  password   varchar(2047),
-  name       nvarchar(2047)
+  email      nvarchar(200) unique,
+  password   varchar(2048),
+  name       nvarchar(2048)
 );
 
 insert into users(name, email, password)
@@ -18,11 +18,13 @@ insert into users(name, email, password)
 insert into users(name, email, password)
   values('Support', 'support@codestar.work', sha2('password', 256));
 
+-- drop table if exists posts;
 create table posts (
   id         serial,
   user       bigint,
-  topic      nvarchar(2047),
-  detail     nvarchar(16383)
+  topic      nvarchar(2048),
+  detail     nvarchar(16384),
+  file       nvarchar(1024)
 );
 
 

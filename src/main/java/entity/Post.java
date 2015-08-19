@@ -11,6 +11,8 @@ public class Post {
 	String topic;
 	@Column(name="detail")
 	String detail;
+	@Column(name="file")
+	String file;
 	
 	public Long getId() { return id; };
 	public void setId(Long id) { this.id = id; }
@@ -20,11 +22,16 @@ public class Post {
 	public void setTopic(String topic) { this.topic = topic; }
 	public String getDetail() { return detail; }
 	public void setDetail(String detail) { this.detail = detail; }
+	public String getFile() { return file; }
+	public void setFile(String file) { this.file = file; }
+	
 	public Post() {}
-	public Post(Long id, Long user, String topic, String detail) {
+	public Post(Long id, Long user, String topic, String detail,
+		String file) {
 		this.id     = id;
 		this.user   = user;
 		this.topic  = topic;
 		this.detail = detail;
+		this.file   = file;
 	}
 }

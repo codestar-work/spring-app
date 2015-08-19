@@ -1,4 +1,5 @@
 package web;
+import java.io.*;
 import java.sql.*;
 import java.util.*;
 import java.security.*;
@@ -9,6 +10,7 @@ import javax.servlet.http.*;
 import org.springframework.ui.*;
 import org.springframework.boot.*;
 import org.springframework.stereotype.*;
+import org.springframework.web.multipart.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.*;
@@ -49,46 +51,6 @@ public class Web {
 		database.close();		
 		model.addAttribute("post", post);
 		return "view";
-	}
-
-	@RequestMapping("/post")
-	String post(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("email") == null) {
-			return "redirect:/login";
-		} else {
-			return "post";
-		}
-	}
-
-	@RequestMapping(value="/post", method=RequestMethod.POST)
-	String postTopic(HttpServletRequest request, String topic, String detail) {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("email") == null) {
-			return "redirect:/login";
-		} else {
-			User user = (User)session.getAttribute("user");
-			Post post = new Post();
-			post.setUser(user.getId());
-			post.setTopic(topic);
-			post.setDetail(detail);
-			
-			Session database = factory.openSession();
-			database.beginTransaction();
-			database.save(post);
-			database.flush();
-			database.getTransaction().commit();
-			database.close();
-			return "redirect:/";
-		}
-	}
-
-	@RequestMapping("/logout")
-	String logout(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		session.removeAttribute("email");
-		session.invalidate();
-		return "logout";
 	}
 
 	@RequestMapping("/login")
@@ -134,6 +96,62 @@ public class Web {
 			}
 		} catch (Exception e) {}
 		return result;
+	}
+
+	@RequestMapping("/logout")
+	String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		session.removeAttribute("email");
+		session.invalidate();
+		return "logout";
+	}
+
+	@RequestMapping("/post")
+	String post(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("email") == null) {
+			return "redirect:/login";
+		} else {
+			return "post";
+		}
+	}
+
+	@RequestMapping(value="/post", method=RequestMethod.POST)
+	String postTopic(HttpServletRequest request, 
+		String topic, String detail, MultipartFile file) {
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("email") == null) {
+			return "redirect:/login";
+		} else {
+			String path = "src/main/resources/public/upload/";
+			String name = "unknown.jpg";
+			if (file.isEmpty()) {
+			} else {
+				name = UUID.randomUUID() + ".jpg";
+				try {
+					byte[] bytes = file.getBytes();
+					BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(path + name)
+					);
+					stream.write(bytes);
+					stream.close();
+				} catch (Exception e) {}	
+			}
+			User user = (User)session.getAttribute("user");
+			Post post = new Post();
+			post.setUser(user.getId());
+			post.setTopic(topic);
+			post.setDetail(detail);
+			post.setFile(name);
+			
+			Session database = factory.openSession();
+			database.beginTransaction();
+			database.save(post);
+			database.flush();
+			database.getTransaction().commit();
+			database.close();
+			return "redirect:/";
+		}
 	}
 
 }

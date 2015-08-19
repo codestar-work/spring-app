@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-6">
 			<h1>Post</h1>
-			<form method="post">
+			<form method="post" enctype="multipart/form-data">
 				<input name="topic"
 					class="form-control"
 					type="text"
@@ -14,6 +14,7 @@
 					class="form-control"
 					placeholder="Detail"
 				></textarea>
+				<input type="file" name="file" />
 				<input type="submit" class="btn btn-primary" value="Post" />
 			</form>
 		</div>

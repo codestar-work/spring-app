@@ -1,24 +1,15 @@
 package web;
 import java.sql.*;
 import java.util.*;
-import java.security.*;
 import javax.sql.*;
-import javax.annotation.*;
-import javax.persistence.*;
-import javax.servlet.http.*;
-import org.springframework.ui.*;
-import org.springframework.boot.*;
-import org.springframework.stereotype.*;
-import org.springframework.boot.autoconfigure.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.*;
-
 import org.hibernate.*;
 import org.hibernate.cfg.*;
+import org.springframework.boot.*;
+import org.springframework.web.bind.annotation.*;
 
 import entity.*;
 
-@Controller
+@RestController
 public class Hibernate {
 
 	SessionFactory factory = new Configuration()
@@ -27,7 +18,7 @@ public class Hibernate {
 		.addAnnotatedClass(User.class)
 		.buildSessionFactory();
 		
-	@RequestMapping("/get-post/{id}") @ResponseBody
+	@RequestMapping("/get-post/{id}")
 	Post getPost(@PathVariable Long id) {
 		Post post = new Post();
 		Session session = factory.openSession();
@@ -36,7 +27,7 @@ public class Hibernate {
 		return post;
 	}
 
-	@RequestMapping("/get-post-list") @ResponseBody
+	@RequestMapping("/get-post-list")
 	List getPostList() {
 		List list = new ArrayList();
 		Session session = factory.openSession();
@@ -45,7 +36,7 @@ public class Hibernate {
 		return list;
 	}
 	
-	@RequestMapping("/get-user/{id}") @ResponseBody
+	@RequestMapping("/get-user/{id}")
 	User getUser(@PathVariable Long id) {
 		User user = new User();
 		Session session = factory.openSession();
@@ -54,7 +45,7 @@ public class Hibernate {
 		return user;
 	}
 
-	@RequestMapping("/get-user-list") @ResponseBody
+	@RequestMapping("/get-user-list")
 	List getUserList() {
 		List list = new ArrayList();
 		Session session = factory.openSession();
