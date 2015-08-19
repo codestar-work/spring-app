@@ -1,8 +1,5 @@
-@background: #f2f2f2;
-@background: white;
-
 body {
-	background: @background;
+	background: white;
 }
 
 .btn {
@@ -19,7 +16,8 @@ form > * {
 	background: lightslategray;
 	margin-bottom: 10px;
 	padding-top: 10px;
-	a {
-		color: white;
-	}
+}
+#navigator a {
+	color: white;
+	margin-right: 10px;
 }

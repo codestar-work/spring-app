@@ -8,7 +8,15 @@
 	<title>Web</title>
 
 	<link href="${request.contextPath}/css/bootstrap.css" rel="stylesheet" />
+	<!--
 	<link href="${request.contextPath}/css/styles.less" rel="stylesheet/less" />
+	-->
+	<link href="${request.contextPath}/css/main.css" rel="stylesheet" />
 </head>
 <body>
-<br/>
+<div id="navigator">
+	<div class="container">
+		<a href="${request.contextPath}/">Home</a>
+		<a href="${request.contextPath}/post">New</a>
+	</div>
+</div>
