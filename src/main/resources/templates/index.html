@@ -1,30 +1,23 @@
-<#include "header.html">
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<div class="container">
-	<div class="row">
-		<#list model["posts"] as post>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-			<a href="${request.contextPath}/view/${post.id}">
-				<div class="panel panel-info highlight">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							${post.topic[0..*40]}
-						</h3>
-					</div>
-					<div class="panel-body">
-						<#if post.file != "unknown.jpg">
-						<img class="highlight" 
-							src="${request.contextPath}/upload/${post.file}" 
-						/>
-						</#if>
-						<p>
-							${post.detail[0..*200]}
-						</p>
-					</div>
-				</div>
-			</a>
-		</div>
-		</#list>
+	<title>Web</title>
+
+	<link href="${request.contextPath}/css/bootstrap.css" rel="stylesheet" />
+	<link href="${request.contextPath}/css/main.css" rel="stylesheet" />
+</head>
+<body>
+	
+	<div class="container">
+		<h1>Welcome</h1>
+		<a href="${request.contextPath}/list" class="btn btn-default">List</a>
 	</div>
-</div>
-<#include "footer.html">
+	
+	<script src="${request.contextPath}/js/jquery.js"></script>
+	<script src="${request.contextPath}/js/bootstrap.min.js"></script>
+</body>
+</html>

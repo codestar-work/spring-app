@@ -19,19 +19,19 @@ import entity.*;
 
 @Controller
 public class Web {
-	SessionFactory factory = new Configuration()
-		.addPackage("entity")
-		.addAnnotatedClass(Post.class)
-		.addAnnotatedClass(User.class)
-		.buildSessionFactory();
-		
+	
 	@RequestMapping("*")
 	String error() {
 		return "error";
 	}
-
+	
 	@RequestMapping("/")
-	String index(@ModelAttribute("model") ModelMap model) {
+	String index() {
+		return "index";
+	}
+
+	@RequestMapping("/list")
+	String list(@ModelAttribute("model") ModelMap model) {
 		List list = new ArrayList();
 		try {
 			Session database = factory.openSession();
@@ -39,9 +39,15 @@ public class Web {
 			database.close();
 		} catch (Exception e) {}
 		model.addAttribute("posts", list);
-		return "index";
+		return "list";
 	}
 
+	SessionFactory factory = new Configuration()
+		.addPackage("entity")
+		.addAnnotatedClass(Post.class)
+		.addAnnotatedClass(User.class)
+		.buildSessionFactory();
+		
 	@RequestMapping("/view/{id}")
 	String view(Model model, @PathVariable long id) {
 		Post post = new Post();
