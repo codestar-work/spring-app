@@ -20,16 +20,16 @@ import entity.*;
 @Controller
 public class Web {
 	
-	@RequestMapping("*")
-	String error() {
-		return "error";
-	}
-	
 	@RequestMapping("/")
 	String index() {
 		return "index";
 	}
 
+	@RequestMapping("*")
+	String error() {
+		return "error";
+	}
+	
 	@RequestMapping("/list")
 	String list(@ModelAttribute("model") ModelMap model) {
 		List list = new ArrayList();
@@ -117,6 +117,9 @@ public class Web {
 			return "post";
 		}
 	}
+	
+	@Value("${my.upload.path}")
+	String uploadPath;
 
 	@RequestMapping(value="/post", method=RequestMethod.POST)
 	String postTopic(HttpSession session, 
@@ -124,15 +127,13 @@ public class Web {
 		if (session.getAttribute("user") == null) {
 			return "redirect:/login";
 		} else {
-			String path = "src/main/resources/public/upload/";
 			String name = "unknown.jpg";
-			if (file.isEmpty()) {
-			} else {
+			if (!file.isEmpty()) {
 				name = UUID.randomUUID() + ".jpg";
 				try {
 					byte[] bytes = file.getBytes();
 					BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(path + name)
+						new FileOutputStream(uploadPath + "/" + name)
 					);
 					stream.write(bytes);
 					stream.close();

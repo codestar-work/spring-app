@@ -11,7 +11,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<a href="${request.contextPath}/view/${post.id}">
+				<a href="/view/${post.id}">
 					${post.topic}
 				</a>
 			</h3>
@@ -19,7 +19,7 @@
 		<div class="panel-body">
 			<#if post.file != "unknown.jpg">
 			<img class="highlight" 
-				src="${request.contextPath}/upload/${post.file}" 
+				src="/upload/${post.file}" 
 			/>
 			</#if>
 			<p>
