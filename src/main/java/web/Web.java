@@ -24,6 +24,11 @@ public class Web {
 	String index() {
 		return "index";
 	}
+	
+	@RequestMapping("/jsp")
+	String jsp() {
+		return "index-jsp";
+	}
 
 	@RequestMapping("*")
 	String error() {
