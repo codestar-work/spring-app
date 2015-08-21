@@ -22,9 +22,13 @@
 - หรือ ใช้คำสั่ง mvn spring-boot:run
 - หรือ Run ผ่าน IDE
 
+# การทำงานบน Java Application Server
+- web นี้จะ run ที่ / เท่านั้น ถ้าต้องการ deploy บน app server ให้ undeploy / ของเดิมก่อน
+- อย่าลืมเปลี่ยน my.upload.path ให้ตรงกับ app server ที่ใช้อยู่ ของ Tomcat มีอยู่แล้ว 
+เอาเครื่องหมาย # ออกก็ใช้ได้เลย 
+
 # การใช้งาน
 - เปิด browser ไปที่ http://localhost:3000
-- ถ้า deploy บน app server ให้ไปที่ URL ที่กำหนดเช่น http://localhost:8080/spring-app
 - ใช้ Email: user@codestar.work และ Password: password ในการใช้งาน
 
 # หลักการทำงาน
