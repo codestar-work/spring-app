@@ -36,7 +36,7 @@ public class Web {
 	}
 	
 	@RequestMapping("/list")
-	String list(@ModelAttribute("model") ModelMap model) {
+	String list(Model model) {
 		List list = new ArrayList();
 		try {
 			Session database = factory.openSession();
