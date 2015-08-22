@@ -22,14 +22,15 @@
 - หรือ ใช้คำสั่ง mvn spring-boot:run
 - หรือ Run ผ่าน IDE
 
-# การทำงานบน Java Application Server
-- web นี้จะ run ที่ / เท่านั้น ถ้าต้องการ deploy บน app server ให้ undeploy / ของเดิมก่อน
-- อย่าลืมเปลี่ยน my.upload.path ให้ตรงกับ app server ที่ใช้อยู่ ของ Tomcat มีอยู่แล้ว 
-เอาเครื่องหมาย # ออกก็ใช้ได้เลย 
-
 # การใช้งาน
 - เปิด browser ไปที่ http://localhost:3000
 - ใช้ Email: user@codestar.work และ Password: password ในการใช้งาน
+
+# การทำงานบน Java Application Server
+- web นี้จะ run ที่ / เท่านั้น ถ้าต้องการ deploy บน app server ให้ undeploy / ของเดิมก่อน
+- อย่าลืมเปลี่ยน my.upload.path ใน application.properties ให้ตรงกับ app server ที่ใช้อยู่ 
+ของ Tomcat มีอยู่แล้ว เอาเครื่องหมาย # ออกก็ใช้ได้เลย อย่าลืมไปสร้าง folder ว่างๆ ชื่อ upload
+ที่ apache-tomcat/webapps ด้วย
 
 # หลักการทำงาน
 - pom.xml ระบบนี้ใช้ Maven ในการ build ดังนั้นต้องมี file นี้ก่อน 
@@ -40,3 +41,6 @@
 - src/main/java/web/Hibernate.java ตัวอย่างการใช้ Hibernate 
 - src/main/java/web/Variable.java ตัวอย่างการรับ parameter แบบธรรมดาและ @PathVariable
 - src/main/java/web/Web.java เป็น controller หลักของระบบ
+- src/main/java/entity/User.java เป็น entity class ของ users ในฐานข้อมูล
+- src/main/java/entity/Post.java เป็น entity class ของ posts ในฐานข้อมูล
+
