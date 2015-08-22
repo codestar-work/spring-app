@@ -21,7 +21,7 @@ public class Template {
 	
 	@RequestMapping("/demo-jsp")
 	String jsp() {
-		return "demo-jsp";
+		return "index-jsp";
 	}
 	
 	@RequestMapping("/demo-freemarker")

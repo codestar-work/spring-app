@@ -25,11 +25,6 @@ public class Web {
 		return "index";
 	}
 	
-	@RequestMapping("/jsp")
-	String jsp() {
-		return "index-jsp";
-	}
-
 	@RequestMapping("*")
 	String error() {
 		return "error";
@@ -58,7 +53,7 @@ public class Web {
 		Post post = new Post();
 		Session database = factory.openSession();
 		post = (Post)database.get(Post.class, id);
-		database.close();		
+		database.close();
 		model.addAttribute("post", post);
 		return "view";
 	}
@@ -73,7 +68,7 @@ public class Web {
 	}
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	String doLogin(HttpSession session, String email, String password) {
+	String login(HttpSession session, String email, String password) {
 		Session database = factory.openSession();
 		org.hibernate.Query query = database.createQuery(
 			"from User where email = :email and password = :password");
@@ -127,7 +122,7 @@ public class Web {
 	String uploadPath;
 
 	@RequestMapping(value="/post", method=RequestMethod.POST)
-	String postTopic(HttpSession session, 
+	String post(HttpSession session, 
 		String topic, String detail, MultipartFile file) {
 		if (session.getAttribute("user") == null) {
 			return "redirect:/login";
@@ -152,13 +147,16 @@ public class Web {
 			post.setFile(name);
 			
 			Session database = factory.openSession();
-			database.beginTransaction();
 			database.save(post);
 			database.flush();
-			database.getTransaction().commit();
 			database.close();
+			
 			return "redirect:/";
 		}
 	}
 
+	@RequestMapping("/view-angular")
+	String viewAngular() {
+		return "view-angular";
+	}
 }

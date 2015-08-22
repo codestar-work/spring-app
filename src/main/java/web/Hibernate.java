@@ -49,9 +49,31 @@ public class Hibernate {
 	List getUserList() {
 		List list = new ArrayList();
 		Session session = factory.openSession();
+		org.hibernate.Query query = session.createQuery("from User");
+		list = query.list();
+		session.close();
+		return list;
+	}
+	
+	@RequestMapping("/get-user-by-email")
+	List getUserList(String email) {
+		List list = new ArrayList();
+		Session session = factory.openSession();
 		org.hibernate.Query query = session.createQuery(
 			"from User where email = :email");
-		query.setParameter("email", "user@codestar.work");
+		query.setParameter("email", email);
+		list = query.list();
+		session.close();
+		return list;
+	}
+	
+	@RequestMapping("/search-ajax")
+	List searchAjax(String search) {
+		List list = new ArrayList();
+		Session session = factory.openSession();
+		org.hibernate.Query query = session.createQuery(
+			"from Post where topic like :value or detail like :value");
+		query.setParameter("value", "%" + search + "%");
 		list = query.list();
 		session.close();
 		return list;
