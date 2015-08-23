@@ -32,12 +32,9 @@ public class Web {
 	
 	@RequestMapping("/list")
 	String list(Model model) {
-		List list = new ArrayList();
-		try {
-			Session database = factory.openSession();
-			list = database.createQuery("from Post").list();
-			database.close();
-		} catch (Exception e) {}
+		Session database = factory.openSession();
+		List list = database.createQuery("from Post").list();
+		database.close();
 		model.addAttribute("posts", list);
 		return "list";
 	}
@@ -151,12 +148,34 @@ public class Web {
 			database.flush();
 			database.close();
 			
-			return "redirect:/";
+			return "redirect:/list";
 		}
 	}
-
-	@RequestMapping("/view-angular")
-	String viewAngular() {
-		return "view-angular";
+	
+	@RequestMapping("/search-json") @ResponseBody
+	List searchAjax(String search) {
+		List list = new ArrayList();
+		Session session = factory.openSession();
+		org.hibernate.Query query = session.createQuery(
+			"from Post where topic like :value or detail like :value");
+		query.setParameter("value", "%" + search + "%");
+		list = query.list();
+		session.close();
+		return list;
 	}
+
+	@RequestMapping("/list-jsp")
+	String jsp(Model model) {
+		Session database = factory.openSession();
+		List list = database.createQuery("from Post").list();
+		database.close();
+		model.addAttribute("posts", list);
+		return "list-jsp";
+	}
+	
+	@RequestMapping("/list-angular")
+	String viewAngular() {
+		return "list-angular";
+	}
+	
 }

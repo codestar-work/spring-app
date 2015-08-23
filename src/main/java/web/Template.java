@@ -18,24 +18,22 @@ import entity.*;
 
 @Controller
 public class Template {
-	
-	@RequestMapping("/demo-jsp")
-	String jsp() {
-		return "index-jsp";
-	}
-	
+
 	@RequestMapping("/demo-freemarker")
 	String freemarker() {
 		return "demo-freemarker";
 	}
+	
 	@RequestMapping("/demo-velocity")
 	String velocity() {
 		return "demo-velocity";
 	}
+	
 	@RequestMapping("/demo-thymeleaf")
 	String thymeleaf() {
 		return "demo-thymeleaf";
 	}
+	
 	@RequestMapping("/demo-mustache")
 	String mustache() {
 		return "demo-mustache";
