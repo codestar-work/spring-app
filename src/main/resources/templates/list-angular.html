@@ -1,7 +1,26 @@
 <#include "header.html">
-	
+	<style>
+	[ng-cloak] {
+		display: none !important;
+	}
+	</style>
 	<script src="/js/angular.min.js"></script>
-	<div ng-app="myApp" ng-controller="myCtrl" class="container">
+	<div ng-app="App" ng-controller="Controller" class="container" ng-cloak>
+		
+		<form ng-submit="search()">
+			<input type="text" ng-model="query" placeholder="Search"
+				class="form-control" autofocus="autofocus" />
+			<input type="submit" value="Search" class="btn btn-primary" />
+		</form>
+		
+		<ul>
+			<li ng-repeat="r in records">
+				<a href="/view/{{r.id}}">
+					{{r.topic}}
+				</a>
+			</li>
+		</ul>
+		
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" 
 				ng-repeat="p in posts">
@@ -14,8 +33,8 @@
 						</div>
 						<div class="panel-body">
 							<img class="highlight"
-								src="/upload/{{p.file}}" 
-								ng-if="p.file != 'unknown.jpg'"/>
+								ng-if="p.file != 'unknown.jpg'"
+								src="/upload/{{p.file}}" />
 							<p>
 								{{p.detail}}
 							</p>
@@ -27,8 +46,15 @@
 	</div>
 	
 	<script>
-		angular.module('myApp', []).controller('myCtrl', 
+		angular.module('App', []).controller('Controller', 
 			function ($scope, $http) {
+				$scope.search = function() {
+					$http.get("/search-json?search=" + $scope.query)
+					.success(function(records) {
+						$scope.records = records;
+					});
+				}
+				
 				$http.get("/get-post-list")
 				.success(function(response) {
 					$scope.posts = response;
