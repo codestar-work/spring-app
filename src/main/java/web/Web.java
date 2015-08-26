@@ -105,6 +105,25 @@ public class Web {
 		session.invalidate();
 		return "logout";
 	}
+	
+	@RequestMapping("/register")
+	String register() {
+		return "register";
+	}
+	
+	@RequestMapping(value="/register", method=RequestMethod.POST)
+	String register(String email, String password, String name) {
+		User user = new User();
+		user.setEmail(email);
+		user.setPassword(encode(password));
+		user.setName(name);
+		Session database = factory.openSession();
+		database.save(user);
+		database.flush();
+		database.close();
+
+		return "redirect:/";	
+	}
 
 	@RequestMapping("/post")
 	String post(HttpSession session) {
