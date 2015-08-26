@@ -126,7 +126,9 @@ public class Web {
 		} else {
 			String name = "unknown.jpg";
 			if (!file.isEmpty()) {
-				name = UUID.randomUUID() + ".jpg";
+				String [] tokens = file.getOriginalFilename().split("\\.");
+				String fileType = tokens[tokens.length - 1];
+				name = UUID.randomUUID() + "." + fileType;
 				try {
 					byte[] bytes = file.getBytes();
 					BufferedOutputStream stream = new BufferedOutputStream(
