@@ -173,6 +173,32 @@ public class Web {
 		}
 	}
 	
+	@RequestMapping("/profile")
+	String profile(HttpSession session, Model model) {
+		if (session.getAttribute("user") == null) {
+			return "redirect:/login";
+		} else {
+			model.addAttribute("data", session.getAttribute("user"));
+			return "profile";
+		}
+	}
+	
+	@RequestMapping(value="/profile", method=RequestMethod.POST)
+	String profile(HttpSession session, String name) {
+		if (session.getAttribute("user") == null) {
+			return "redirect:/login";
+		} else {
+			User user = (User)session.getAttribute("user");
+			user.setName(name);
+			session.setAttribute("user", user);
+			Session database = factory.openSession();
+			database.update(user);
+			database.flush();
+			database.close();
+			return "redirect:/profile";
+		}
+	}
+	
 	@RequestMapping("/search-json") @ResponseBody
 	List searchAjax(String search) {
 		List list = new ArrayList();
